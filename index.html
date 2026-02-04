@@ -38,7 +38,7 @@ body{font-family:Inter,system-ui;background:#f5f7fa}
     </div>
 
     <div class="flex gap-6">
-      <span class="nav-btn" onclick="login()">Login</span>
+      <a href="login.html" class="nav-btn">Login</a>
       <span class="nav-btn" onclick="sell()">Sell</span>
       <span class="nav-btn" onclick="openCart()">Cart (<span id="cartCount">0</span>)</span>
     </div>
@@ -135,12 +135,12 @@ body{font-family:Inter,system-ui;background:#f5f7fa}
 © 2026 Public Bazzar
 </footer>
 
-<!-- JS -->
+<!-- JAVASCRIPT -->
 <script>
 let cart=[];
 
-function addToCart(p){
-  cart.push(p);
+function addToCart(item){
+  cart.push(item);
   document.getElementById("cartCount").innerText=cart.length;
 }
 
@@ -148,8 +148,9 @@ function openCart(){
   alert(cart.length ? "Cart Items:\n"+cart.join(", ") : "Cart is empty");
 }
 
-function login(){alert("Login coming soon 🔐")}
-function sell(){alert("Seller panel coming soon 🏪")}
+function sell(){
+  alert("Seller panel coming soon 🏪");
+}
 
 function goTo(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
