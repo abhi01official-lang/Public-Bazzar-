@@ -26,12 +26,12 @@ body{
   font-weight:600;
 }
 .btn:hover{background:#1e40af}
+.error{color:#dc2626;font-size:14px;margin-top:10px}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="bg-white shadow p-4">
   <div class="max-w-5xl mx-auto flex justify-between items-center">
     <h1 class="text-2xl font-extrabold text-blue-600">Public Bazzar</h1>
@@ -39,39 +39,53 @@ body{
   </div>
 </header>
 
-<!-- LOGIN CARD -->
 <div class="flex items-center justify-center min-h-screen">
   <div class="card w-full max-w-md">
     <h2 class="text-2xl font-bold text-center mb-6">Login to Public Bazzar</h2>
 
     <label class="font-semibold text-sm">Mobile Number</label>
-    <input type="tel" placeholder="Enter mobile number"
+    <input id="phone" type="tel" placeholder="Enter mobile number"
       class="w-full mt-2 p-3 border rounded mb-4">
 
     <label class="font-semibold text-sm">Password</label>
-    <input type="password" placeholder="Enter password"
+    <input id="password" type="password" placeholder="Enter password"
       class="w-full mt-2 p-3 border rounded mb-6">
 
     <button class="btn w-full" onclick="doLogin()">Login</button>
 
+    <p id="error" class="error"></p>
+
     <p class="text-center text-sm mt-4">
       New user?
-      <a onclick="window.location.href='create-account.html'"
-   class="text-blue-600 font-semibold cursor-pointer">
-  Create account
-</a>
-
-
+      <a href="create-account.html" class="text-blue-600 font-semibold">
+        Create account
+      </a>
     </p>
   </div>
 </div>
 
 <script>
 function doLogin(){
-  alert("Login successful (demo) ✅");
-  window.location.href = "index.html";
+  const phone = document.getElementById("phone").value;
+  const password = document.getElementById("password").value;
+  const error = document.getElementById("error");
+
+  const savedUser = JSON.parse(localStorage.getItem("pb_user"));
+
+  if(!savedUser){
+    error.innerText = "No account found. Please create account first.";
+    return;
+  }
+
+  if(phone === savedUser.phone && password === savedUser.password){
+    localStorage.setItem("pb_loggedin", "true");
+    window.location.href = "index.html";
+  } else {
+    error.innerText = "Invalid mobile number or password";
+  }
 }
 </script>
 
 </body>
 </html>
+
