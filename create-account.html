@@ -89,11 +89,11 @@ function register(){
     password
   };
 
+  // SAME KEY as login.html
   localStorage.setItem("pb_user", JSON.stringify(user));
-  localStorage.setItem("pb_logged_in", "true");
 
-  alert("Account created successfully!");
-  window.location.href = "index.html";
+  alert("Account created successfully! Please login.");
+  window.location.href = "login.html";
 }
 </script>
 
